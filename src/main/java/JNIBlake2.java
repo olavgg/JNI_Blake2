@@ -1,5 +1,4 @@
 
-
 /*
  * Copyright [2014] [Olav Gronenaas Gjerde]
  *
@@ -16,14 +15,41 @@
  * limitations under the License.
  */
 
+import java.io.File;
+
 public class JNIBlake2 {
     static {
-        System.loadLibrary("hello"); // hello.dll (Windows) or libhello.so (Unixes)
+        // jni_blake2.dll (Windows) or jni_blake2.so (Unixes)
+        System.loadLibrary("jni_blake2");
     }
-    // A native method that receives nothing and returns void
-    private native void sayHello();
 
-    public static void main(String[] args) {
-        new JNIBlake2().sayHello();  // invoke the native method
+    protected JNIBlake2(){}
+
+    public static JNIBlake2 getInstance(){
+        return new JNIBlake2();
+    }
+
+    private native void blake2_init(File file);
+    private native void blake2_update(byte[] bytes);
+    private native void blake2_final(byte[] bytes);
+
+    public void init(){
+
+    }
+
+    public void init(File file){
+        blake2_init(file);
+    }
+
+    public void update(){
+
+    }
+
+    public void finalize(){
+
+    }
+
+    public String getHex(){
+        return "";
     }
 }
